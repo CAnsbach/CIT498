@@ -20,7 +20,6 @@ public class EventHomeScreen extends AppCompatActivity
         {
             this.email = email.getString("Email");
 
-            Toast.makeText(getApplicationContext(), this.email, Toast.LENGTH_SHORT).show();
         }
     }
 }
