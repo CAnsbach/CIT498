@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CampusEventTracker">
         <activity
+            android:name=".EventInfoActivity"
+            android:exported="true" />
+        <activity
             android:name=".EventHomeScreen"
             android:exported="true" />
         <activity

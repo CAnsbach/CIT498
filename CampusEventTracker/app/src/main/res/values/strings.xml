@@ -5,4 +5,11 @@
     <string name="password_PH">Password</string>
     <string name="btnLogin_text">Log In</string>
     <string name="btnRegister_text">Register</string>
+    <string name="btnEventInfo_text">More Info</string>
+    <string name="txtEventInfo_default">None</string>
+    <string name="txtEventInfo_Name">Event Name:</string>
+    <string name="txtEventInfo_Location">Location:</string>
+    <string name="txtEventInfo_Description">Event Description:</string>
+    <string name="txtEventInfo_Date">Date:</string>
+    <string name="txtEventInfo_Time">Time:</string>
 </resources>

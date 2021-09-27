@@ -3,14 +3,16 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Git Repos/CIT498/CampusEventTracker/app/src/main/res/layout/activity_event_home_screen.xml" value="0.17604166666666668" />
+        <entry key="..\:/Git Repos/CIT498/CampusEventTracker/app/src/main/res/layout/activity_event_home_screen.xml" value="0.33" />
+        <entry key="..\:/Git Repos/CIT498/CampusEventTracker/app/src/main/res/layout/activity_event_info.xml" value="0.21354166666666666" />
+        <entry key="..\:/Git Repos/CIT498/CampusEventTracker/app/src/main/res/layout/events_row_layout.xml" value="0.21354166666666666" />
         <entry key="..\:/Users/biote/AndroidStudioProjects/CampusEventTracker/app/src/main/res/layout/activity_login.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/biote/AndroidStudioProjects/CampusEventTracker/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/biote/Documents/GitHub/CIT498/CampusEventTracker/app/src/main/res/layout/activity_main.xml" value="0.2" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
