@@ -19,6 +19,7 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder
     {
         // Your holder should contain a member variable
         // for any view that will be set as you render a row
+        public TextView dateTextView;
         public TextView nameTextView;
         public TextView descriptionTextView;
         public Button moreInfoButton;
@@ -30,6 +31,7 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder
             // to access the context from any ViewHolder instance.
             super(itemView);
 
+            dateTextView = itemView.findViewById(R.id.txtEventDate);
             nameTextView = itemView.findViewById(R.id.txtEventName);
             descriptionTextView = itemView.findViewById(R.id.txtEventDescription);
             moreInfoButton = itemView.findViewById(R.id.btnEventInfo);
@@ -63,8 +65,10 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder
         EventInfo event = mEvents.get(position);
 
         // Set the text shown for the list item to the name of the event
+        TextView date = viewHolder.dateTextView;
+        date.setText(event.getDate());
         TextView name = viewHolder.nameTextView;
-        name.setText(new StringBuilder().append(event.getName()).append(" - ").append(event.getLocation()).toString());
+        name.setText(new StringBuilder().append(event.getName()).append(" - ").append(event.getLocation()));
         TextView description = viewHolder.descriptionTextView;       //Set the message button as the button to open the contacts information
         description.setText(event.getDescription());
 
