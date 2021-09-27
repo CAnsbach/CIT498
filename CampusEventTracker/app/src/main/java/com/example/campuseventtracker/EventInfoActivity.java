@@ -10,5 +10,7 @@ public class EventInfoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_info);
+
+        getSupportActionBar().setTitle("CET - Event Information");
     }
 }

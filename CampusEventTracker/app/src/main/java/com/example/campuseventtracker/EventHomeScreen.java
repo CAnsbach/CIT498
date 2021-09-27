@@ -29,6 +29,8 @@ public class EventHomeScreen extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_home_screen);
 
+        getSupportActionBar().setTitle("CET - School Events");
+
         Bundle email = getIntent().getExtras();
         RecyclerView rvEvents = findViewById(R.id.rvEvents);
 

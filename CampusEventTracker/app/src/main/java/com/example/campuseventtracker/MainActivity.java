@@ -21,6 +21,8 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        getSupportActionBar().setTitle("CET - User Login");
+
         inpEmail =  findViewById(R.id.txtEmailInput);
         inpPassword = findViewById(R.id.txtPasswordInput);
         btnLogin = findViewById(R.id.btnLogin);
