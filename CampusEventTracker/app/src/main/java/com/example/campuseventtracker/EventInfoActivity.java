@@ -5,13 +5,21 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
-public class EventInfoActivity extends AppCompatActivity
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+
+public class EventInfoActivity extends AppCompatActivity implements OnMapReadyCallback
 {
     TextView txtName;
     TextView txtLocation;
     TextView txtDescription;
     TextView txtDate;
     TextView txtTime;
+    EventInfo event;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -21,7 +29,7 @@ public class EventInfoActivity extends AppCompatActivity
 
         getSupportActionBar().setTitle("CET - Event Information");
 
-        EventInfo event = (EventInfo) getIntent().getSerializableExtra("event");
+        event = (EventInfo) getIntent().getSerializableExtra("event");
 
         txtName = findViewById(R.id.txtDispEventName);
         txtLocation = findViewById(R.id.txtDispEventLocation);
@@ -49,5 +57,24 @@ public class EventInfoActivity extends AppCompatActivity
         {
             txtTime.setText(event.getTime());
         }
+
+        // Set the layout file as the content view.
+        setContentView(R.layout.activity_main);
+
+        // Get a handle to the fragment and register the callback.
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
+
+
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        LatLng eventLocation = new LatLng(Float.parseFloat(event.getLatitude()), Float.parseFloat(event.getLongitude()));
+        googleMap.addMarker(new MarkerOptions()
+                .position(eventLocation)
+                .title("Event"));
+        googleMap.moveCamera(CameraUpdateFactory.newLatLng(eventLocation));
     }
 }
