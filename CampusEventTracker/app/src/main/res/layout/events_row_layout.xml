@@ -4,7 +4,8 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:paddingTop="10dp"
-    android:paddingBottom="10dp">
+    android:paddingBottom="10dp"
+    android:textAlignment="center">
 
     <TextView
         android:id="@+id/txtEventDate"
@@ -30,10 +31,11 @@
 
     <Button
         android:id="@+id/btnEventInfo"
-        android:layout_width="385sp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
         android:text="@string/btnEventInfo_text"
+        android:textAlignment="center"
         android:textSize="12sp" />
 </LinearLayout>

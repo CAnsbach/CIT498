@@ -52,13 +52,13 @@
         android:id="@+id/txtEventInfoDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="200dp"
         android:layout_marginTop="24dp"
         android:text="@string/txtEventInfo_Date"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtDispEventTime" />
+        app:layout_constraintTop_toBottomOf="@+id/txtDispEventLocation" />
 
     <TextView
         android:id="@+id/txtEventInfoTime"
@@ -96,21 +96,24 @@
 
     <TextView
         android:id="@+id/txtDispEventDescription"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="70sp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:scrollbars="vertical"
         android:text="@string/txtEventInfo_default"
         android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtEventInfoDescription" />
 
     <TextView
         android:id="@+id/txtDispEventDate"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="200dp"
+        android:layout_marginTop="12dp"
         android:text="@string/txtEventInfo_default"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -127,14 +130,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtEventInfoTime" />
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragmentContainerView2"
-        android:name="com.example.campuseventtracker.MapsFragment"
+    <FrameLayout
+        android:id="@+id/map_frame_layout"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtDispEventDescription" />
+        app:layout_constraintTop_toBottomOf="@+id/txtDispEventDescription"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

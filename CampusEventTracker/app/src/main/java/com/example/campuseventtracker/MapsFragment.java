@@ -18,12 +18,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MapsFragment extends Fragment
 {
-
-    private static final EventInfo event = new EventInfo("Placeholder", "Placeholder");
-
-    private EventInfo info;
-
-    private OnMapReadyCallback callback = new OnMapReadyCallback()
+    EventInfo event;
+    private final OnMapReadyCallback callback = new OnMapReadyCallback()
     {
 
         /**
@@ -38,7 +34,11 @@ public class MapsFragment extends Fragment
         @Override
         public void onMapReady(GoogleMap googleMap)
         {
-
+            LatLng eventLocation = new LatLng(Float.parseFloat(event.getLatitude()), Float.parseFloat(event.getLongitude()));
+            googleMap.addMarker(new MarkerOptions()
+                    .position(eventLocation)
+                    .title("Event"));
+            googleMap.moveCamera(CameraUpdateFactory.newLatLng(eventLocation));
         }
     };
 
@@ -48,7 +48,28 @@ public class MapsFragment extends Fragment
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState)
     {
-        return inflater.inflate(R.layout.fragment_maps, container, false);
+        //Initialize view
+        View view = inflater.inflate(R.layout.fragment_maps, container, false);
+
+        //Get Event Information
+        assert getArguments() != null;
+        event = (EventInfo) getArguments().getSerializable("event");
+
+        //Initialize map fragment
+        SupportMapFragment sMF = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
+
+        //Async map
+        assert sMF != null;
+        sMF.getMapAsync(googleMap -> {
+            LatLng eventLocation = new LatLng(Float.parseFloat(event.getLatitude()), Float.parseFloat(event.getLongitude()));
+            googleMap.addMarker(new MarkerOptions()
+                    .position(eventLocation)
+                    .title(event.getLocation()));
+            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(eventLocation, 17f));
+        });
+
+        //return view
+        return view;
     }
 
     @Override

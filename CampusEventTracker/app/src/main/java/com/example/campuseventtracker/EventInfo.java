@@ -25,7 +25,7 @@ public class EventInfo implements Serializable
         mDate = date;
         mTime = time;
         mLatitude = latitude;
-        mLongitude = location;
+        mLongitude = longitude;
     }
 
     public EventInfo(String name, String description)

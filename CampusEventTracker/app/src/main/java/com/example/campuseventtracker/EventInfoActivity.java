@@ -1,18 +1,13 @@
 package com.example.campuseventtracker;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.widget.TextView;
 
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
-
-public class EventInfoActivity extends AppCompatActivity implements OnMapReadyCallback
+public class EventInfoActivity extends AppCompatActivity
 {
     TextView txtName;
     TextView txtLocation;
@@ -34,6 +29,7 @@ public class EventInfoActivity extends AppCompatActivity implements OnMapReadyCa
         txtName = findViewById(R.id.txtDispEventName);
         txtLocation = findViewById(R.id.txtDispEventLocation);
         txtDescription = findViewById(R.id.txtDispEventDescription);
+        txtDescription.setMovementMethod(new ScrollingMovementMethod());
         txtDate = findViewById(R.id.txtDispEventDate);
         txtTime = findViewById(R.id.txtDispEventTime);
 
@@ -59,22 +55,17 @@ public class EventInfoActivity extends AppCompatActivity implements OnMapReadyCa
         }
 
         // Set the layout file as the content view.
-        setContentView(R.layout.activity_main);
+        //Initialize fragment
 
-        // Get a handle to the fragment and register the callback.
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
+        Fragment fragment = new MapsFragment();
 
+        Bundle eventInfo = new Bundle();
 
-    }
+        eventInfo.putSerializable("event", event);
 
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-        LatLng eventLocation = new LatLng(Float.parseFloat(event.getLatitude()), Float.parseFloat(event.getLongitude()));
-        googleMap.addMarker(new MarkerOptions()
-                .position(eventLocation)
-                .title("Event"));
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(eventLocation));
+        fragment.setArguments(eventInfo);
+
+        //Open Fragment
+        getSupportFragmentManager().beginTransaction().replace(R.id.map_frame_layout, fragment).commit();
     }
 }
