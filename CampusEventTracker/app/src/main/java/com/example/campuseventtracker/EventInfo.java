@@ -1,3 +1,9 @@
+/**
+ * Name: Christopher Ansbach
+ * Last Updated: 10/1/2021
+ * Purpose: Java file to define the EventInfo object to be used to store event data from the JSON file.
+ */
+
 package com.example.campuseventtracker;
 
 import java.io.Serializable;
@@ -5,18 +11,16 @@ import java.util.ArrayList;
 
 public class EventInfo implements Serializable
 {
-    //Attributes of a Contact
-    private String mName;
-    private String mDescription;
-    private String mLocation;
-    private String mDate;
-    private String mTime;
-    private String mLatitude;
-    private String mLongitude;
+    //String to hold event information
+    private final String mName;
+    private final String mDescription;
+    private final String mLocation;
+    private final String mDate;
+    private final String mTime;
+    private final String mLatitude;
+    private final String mLongitude;
 
-    private static int lastEventId = 0;
-
-    //Constructor
+    //Constructor for the EventInfo object
     public EventInfo(String name, String description, String location, String date, String time, String latitude, String longitude)
     {
         mName = name;
@@ -26,12 +30,6 @@ public class EventInfo implements Serializable
         mTime = time;
         mLatitude = latitude;
         mLongitude = longitude;
-    }
-
-    public EventInfo(String name, String description)
-    {
-        mName = name;
-        mDescription = description;
     }
 
     //Getters
@@ -70,11 +68,9 @@ public class EventInfo implements Serializable
         return mLongitude;
     }
 
-    //Create the default ArrayList of "empty" contacts
+    //Create the ArrayList of events to store the events at the school
     public static ArrayList<EventInfo> createEventsList()
     {
-        ArrayList<EventInfo> events = new ArrayList<>();
-
-        return events;
+        return new ArrayList<>();
     }
 }

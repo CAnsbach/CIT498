@@ -1,3 +1,9 @@
+/**
+ * Name: Christopher Ansbach
+ * Last Updated: 10/1/2021
+ * Purpose: Java file to connect to the website and retrieve the events from the user's school.
+ */
+
 package com.example.campuseventtracker;
 
 import java.io.BufferedReader;

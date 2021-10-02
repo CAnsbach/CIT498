@@ -1,27 +1,29 @@
+/**
+ * Name: Christopher Ansbach
+ * Last Updated: 10/1/2021
+ * Purpose: Java file used to display the RecyclerView with the events from the school.
+ */
+
 package com.example.campuseventtracker;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class EventHomeScreen extends AppCompatActivity
 {
-    String[] fields = {"txtEmail"};
-    ArrayList<EventInfo> events;
+    String[] fields = {"txtEmail"}; //Fields to be sent to the website
+    ArrayList<EventInfo> events;    //Array list of EventInfo object to hold data about the school's events.
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -29,35 +31,46 @@ public class EventHomeScreen extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_home_screen);
 
+        //Update the ActionBar to an appropriate title
         getSupportActionBar().setTitle("CET - School Events");
 
+        //Create a bundle to retrieve the email fo the user to sent to the website
         Bundle email = getIntent().getExtras();
+
+        //Instantiate the RecyclerView
         RecyclerView rvEvents = findViewById(R.id.rvEvents);
 
+        //If there is an email to send, send it to the website to get the events of the school related to the email.
         if (email != null)
         {
-
+            //Get the email of the user
             String[] data = {email.getString("Email")};
 
+            //Create a handler to handle the retrieval of the JSON object
             Handler handler = new Handler();
-            handler.post(() -> {
+            handler.post(() ->
+            {
                 RetrieveEventJSONData retrieval = new RetrieveEventJSONData(fields, data);
 
+                //If the retrieval is active, check if it is complete
                 if(retrieval.retrieve())
                 {
+                    //If the retrieval is complete, try to fill the RecyclerView
                     if(retrieval.completed())
                     {
                         try
                         {
-
+                            //String to hold the JSON string from the website
                             String eventInfo = retrieval.result();
 
+                            //Create the list to be used to store the EventInfo objects
                             events = EventInfo.createEventsList();
 
+                            //Create a JSONArray from the JSON string from the website
                             JSONObject eventInfoJSON = new JSONObject(eventInfo);
                             JSONArray eventInfoArray = eventInfoJSON.getJSONArray("Events");
 
-
+                            //For each event in the JSONArray, create a new EventInfo object and add it to the ArrayList.
                             for (int i = 0; i < eventInfoArray.length(); i++)
                             {
                                 JSONObject event = eventInfoArray.getJSONObject(i);
@@ -74,13 +87,12 @@ public class EventHomeScreen extends AppCompatActivity
                             //Create an adapter for the list
                             final EventsAdapter adapter = new EventsAdapter(events, this);
 
-                            // Attach the adapter to the recyclerview to populate items
+                            //Set up the RecyclerView to display the EventInfo objects
                             rvEvents.setAdapter(adapter);
-
-                            // Set layout manager to position the items
                             rvEvents.setLayoutManager(new LinearLayoutManager(this));
 
                         }
+                        //Catch a JSON or general exception and notify the user
                         catch (JSONException e)
                         {
                             Toast.makeText(getApplicationContext(), "An Error has occurred with JSON", Toast.LENGTH_SHORT).show();

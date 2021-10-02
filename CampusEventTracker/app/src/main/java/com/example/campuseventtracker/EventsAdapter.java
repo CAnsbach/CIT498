@@ -1,8 +1,13 @@
+/**
+ * Name: Christopher Ansbach
+ * Last Updated: 10/1/2021
+ * Purpose: Java file to act as the adapter for the RecyclerView to show the events.
+ */
+
 package com.example.campuseventtracker;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,31 +20,38 @@ import java.util.List;
 
 public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder>
 {
-    public class ViewHolder extends RecyclerView.ViewHolder
+    public static class ViewHolder extends RecyclerView.ViewHolder
     {
-        // Your holder should contain a member variable
-        // for any view that will be set as you render a row
+        //Elements used to display the event's date, name, and location
         public TextView dateTextView;
         public TextView nameTextView;
         public TextView descriptionTextView;
+
+        //Button to select an event to display additional information for
         public Button moreInfoButton;
 
-        // We also create a constructor that accepts the entire item row
-        // and does the view lookups to find each subview
-        public ViewHolder(View itemView) {
-            // Stores the itemView in a public final member variable that can be used
-            // to access the context from any ViewHolder instance.
+        public ViewHolder(View itemView)
+        {
             super(itemView);
 
+            //Get the elements to be updated
             dateTextView = itemView.findViewById(R.id.txtEventDate);
             nameTextView = itemView.findViewById(R.id.txtEventName);
             descriptionTextView = itemView.findViewById(R.id.txtEventDescription);
             moreInfoButton = itemView.findViewById(R.id.btnEventInfo);
         }
     }
-    private List<EventInfo> mEvents;
-    private Context mContext;
 
+    //List to hold the events to be displayed
+    private final List<EventInfo> mEvents;
+    private final Context mContext;
+
+    /**
+     * Constructor for the RecyclerView
+     *
+     * @param events List of events to be displayed
+     * @param context Context of the activity displaying the RecyclerView
+     */
     public EventsAdapter(List<EventInfo> events, Context context)
     {
         mEvents = events;
@@ -48,60 +60,59 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder
 
     @Override
     public EventsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+
+        //Inflate the layout for the rows
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
-
-        // Inflate the custom layout
         View contactView = inflater.inflate(R.layout.events_row_layout, parent, false);
 
-        // Return a new holder instance
-        ViewHolder viewHolder = new ViewHolder(contactView);
-        return viewHolder;
+        //Return the viewHolder to display it
+        return new ViewHolder(contactView);
     }
 
     @Override
     public void onBindViewHolder(final ViewHolder viewHolder, int position) {
-        // Get the event based on position
+        //Get the event based on position in the ArrayList
         EventInfo event = mEvents.get(position);
 
-        // Set the text shown for the list item to the name of the event
+        //Update the TextViews and Button based on the event in the ArrayList
         TextView date = viewHolder.dateTextView;
         date.setText(event.getDate());
         TextView name = viewHolder.nameTextView;
         name.setText(new StringBuilder().append(event.getName()).append(" - ").append(event.getLocation()));
-        TextView description = viewHolder.descriptionTextView;       //Set the message button as the button to open the contacts information
+        TextView description = viewHolder.descriptionTextView;
         description.setText(event.getDescription());
 
         Button viewMoreInfo = viewHolder.moreInfoButton;
 
-        //Lambda expression would not work: "Lambda expressions are not supported at language level 7."
-        viewMoreInfo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                display(viewHolder.getLayoutPosition());        //Display the contacts information by passing the event's position in the list
-            }
+        //When the button is clicked, go to the EventInfoActivity
+        viewMoreInfo.setOnClickListener(v -> {
+            display(viewHolder.getLayoutPosition());
         });
     }
 
-    // Returns the total count of items in the list
     @Override
     public int getItemCount() {
         return mEvents.size();
     }
 
-    //Add an item to the list
-    public void add(int position, EventInfo newEvent)
-    {
-        mEvents.add(position, newEvent);
-        notifyItemInserted(position);
-    }
-
-    //Display the information of the contact at the given position
+    /**
+     * Method used to change to the EventInfoActivity when the More Info Button is pressed.
+     *
+     *  @param position Position of the chosen event in the ArrayList
+     */
     public void display(int position)
     {
-        EventInfo info = mEvents.get(position);                          //Get the selected contact
-        Intent intent = new Intent(mContext, EventInfoActivity.class);     //Create a new intent to switch to the DisplayActivity class from the current class
-        intent.putExtra("event", info);                          //Give the intent the contact to be passed to the DisplayActivity class.
-        mContext.startActivity(intent);                                  //State the new intent from the current context
+        //Get the EventInfo object selected
+        EventInfo info = mEvents.get(position);
+
+        //Create a new Intent to change activities
+        Intent intent = new Intent(mContext, EventInfoActivity.class);
+
+        //Add the EventInfo object as an extra to be used by the new activity
+        intent.putExtra("event", info);
+
+        //Start the new activity
+        mContext.startActivity(intent);
     }
 }

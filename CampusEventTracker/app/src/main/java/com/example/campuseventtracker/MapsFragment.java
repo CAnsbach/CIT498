@@ -1,3 +1,9 @@
+/**
+ * Name: Christopher Ansbach
+ * Last Updated: 10/1/2021
+ * Purpose: Java file to create the Maps instance, place the marker, and zoom in on the given latitude and longitude.
+ */
+
 package com.example.campuseventtracker;
 
 import androidx.annotation.NonNull;
@@ -21,24 +27,26 @@ public class MapsFragment extends Fragment
     EventInfo event;
     private final OnMapReadyCallback callback = new OnMapReadyCallback()
     {
-
         /**
-         * Manipulates the map once available.
-         * This callback is triggered when the map is ready to be used.
-         * This is where we can add markers or lines, add listeners or move the camera.
-         * In this case, we just add a marker near Sydney, Australia.
-         * If Google Play services is not installed on the device, the user will be prompted to
-         * install it inside the SupportMapFragment. This method will only be triggered once the
-         * user has installed Google Play services and returned to the app.
+         * When the map is ready, place a marker at the given Latitude and Longitude and zoom in on the marker.
+         *
+         * @param googleMap Google Maps instance to add the marker to
          */
+
         @Override
         public void onMapReady(GoogleMap googleMap)
         {
+
+            //Create new LatLng with the latitude and longitude of the event's location
             LatLng eventLocation = new LatLng(Float.parseFloat(event.getLatitude()), Float.parseFloat(event.getLongitude()));
+
+            //Add the marker to the instance and set it's title to be the location's name
             googleMap.addMarker(new MarkerOptions()
                     .position(eventLocation)
-                    .title("Event"));
-            googleMap.moveCamera(CameraUpdateFactory.newLatLng(eventLocation));
+                    .title(event.getLocation()));
+
+            //Move the camera to the added marker and zoom in on it
+            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(eventLocation, 17f));
         }
     };
 
@@ -51,30 +59,18 @@ public class MapsFragment extends Fragment
         //Initialize view
         View view = inflater.inflate(R.layout.fragment_maps, container, false);
 
-        //Get Event Information
+        //Get the event's information from the passed Bundle
         assert getArguments() != null;
         event = (EventInfo) getArguments().getSerializable("event");
 
-        //Initialize map fragment
-        SupportMapFragment sMF = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
-
-        //Async map
-        assert sMF != null;
-        sMF.getMapAsync(googleMap -> {
-            LatLng eventLocation = new LatLng(Float.parseFloat(event.getLatitude()), Float.parseFloat(event.getLongitude()));
-            googleMap.addMarker(new MarkerOptions()
-                    .position(eventLocation)
-                    .title(event.getLocation()));
-            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(eventLocation, 17f));
-        });
-
-        //return view
+        //Return the inflated view
         return view;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState)
     {
+        //Update the Google Maps instance when the view is created
         super.onViewCreated(view, savedInstanceState);
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
         if (mapFragment != null)

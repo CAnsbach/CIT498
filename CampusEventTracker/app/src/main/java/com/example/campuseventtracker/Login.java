@@ -1,3 +1,9 @@
+/**
+ * Name: Christopher Ansbach
+ * Last Updated: 10/1/2021
+ * Purpose: Java file to connect to the website to check if the user has an account and provided the proper credentials.
+ */
+
 package com.example.campuseventtracker;
 
 import java.io.BufferedReader;
