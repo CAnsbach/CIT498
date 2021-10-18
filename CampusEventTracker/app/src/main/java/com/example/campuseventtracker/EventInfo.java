@@ -19,9 +19,11 @@ public class EventInfo implements Serializable
     private final String mTime;
     private final String mLatitude;
     private final String mLongitude;
+    private final String mEndDate;
+    private final String mEndTime;
 
     //Constructor for the EventInfo object
-    public EventInfo(String name, String description, String location, String date, String time, String latitude, String longitude)
+    public EventInfo(String name, String description, String location, String date, String time, String latitude, String longitude, String endDate, String endTime)
     {
         mName = name;
         mDescription = description;
@@ -30,6 +32,8 @@ public class EventInfo implements Serializable
         mTime = time;
         mLatitude = latitude;
         mLongitude = longitude;
+        mEndDate = endDate;
+        mEndTime = endTime;
     }
 
     //Getters
@@ -66,6 +70,16 @@ public class EventInfo implements Serializable
     public String getLongitude()
     {
         return mLongitude;
+    }
+
+    public String getEndDate()
+    {
+        return mEndDate;
+    }
+
+    public String getEndTime()
+    {
+        return mEndTime;
     }
 
     //Create the ArrayList of events to store the events at the school

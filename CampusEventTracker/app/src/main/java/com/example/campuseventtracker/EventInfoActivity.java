@@ -21,6 +21,8 @@ public class EventInfoActivity extends AppCompatActivity
     TextView txtDescription;
     TextView txtDate;
     TextView txtTime;
+    TextView txtEndDate;
+    TextView txtEndTime;
 
     //Event with the information to display
     EventInfo event;
@@ -44,6 +46,8 @@ public class EventInfoActivity extends AppCompatActivity
         txtDescription.setMovementMethod(new ScrollingMovementMethod());
         txtDate = findViewById(R.id.txtDispEventDate);
         txtTime = findViewById(R.id.txtDispEventTime);
+        txtEndDate = findViewById(R.id.txtDispEventEndDate);
+        txtEndTime = findViewById(R.id.txtDispEventEndTime);
 
         //Check if the information is not null. If it is not, update the TextViews
         if (event.getName() != null)
@@ -65,6 +69,14 @@ public class EventInfoActivity extends AppCompatActivity
         if (event.getTime() != null)
         {
             txtTime.setText(event.getTime());
+        }
+        if(event.getEndDate() != null)
+        {
+            txtEndDate.setText(event.getEndDate());
+        }
+        if(event.getEndTime() != null)
+        {
+            txtEndTime.setText(event.getEndTime());
         }
 
         //Initialize the Google Maps fragment

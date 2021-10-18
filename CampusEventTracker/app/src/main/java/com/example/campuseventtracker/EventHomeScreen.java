@@ -81,7 +81,9 @@ public class EventHomeScreen extends AppCompatActivity
                                 String time = event.getString("Event_Time");
                                 String latitude = event.getString("Location_Lat");
                                 String longitude = event.getString("Location_Long");
-                                events.add(events.size(), new EventInfo(name, description, location, date, time, latitude, longitude));
+                                String endDate = event.getString("Event_EndDate");
+                                String endTime = event.getString("Event_EndTime");
+                                events.add(events.size(), new EventInfo(name, description, location, date, time, latitude, longitude, endDate, endTime));
                             }
 
                             //Create an adapter for the list

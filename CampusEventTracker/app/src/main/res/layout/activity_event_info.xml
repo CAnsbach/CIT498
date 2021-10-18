@@ -7,6 +7,54 @@
     tools:context=".EventInfoActivity">
 
     <TextView
+        android:id="@+id/txtEventInfoEndTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="24dp"
+        android:text="@string/txtEventInfo_EndTime"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtDispEventTime" />
+
+    <TextView
+        android:id="@+id/txtEventInfoEndDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="200dp"
+        android:layout_marginTop="24dp"
+        android:text="@string/txtEventInfo_EndDate"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtDispEventDate" />
+
+    <TextView
+        android:id="@+id/txtDispEventEndDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="200dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/txtEventInfo_default"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtEventInfoEndDate" />
+
+    <TextView
+        android:id="@+id/txtDispEventEndTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/txtEventInfo_default"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtEventInfoEndTime" />
+
+    <TextView
         android:id="@+id/txtEventInfoName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -46,7 +94,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtDispEventDate" />
+        app:layout_constraintTop_toBottomOf="@+id/txtDispEventEndTime" />
 
     <TextView
         android:id="@+id/txtEventInfoDate"
@@ -105,6 +153,7 @@
         android:text="@string/txtEventInfo_default"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtEventInfoDescription" />
 
@@ -134,11 +183,10 @@
         android:id="@+id/map_frame_layout"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtDispEventDescription"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/txtDispEventDescription" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
