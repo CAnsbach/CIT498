@@ -77,7 +77,7 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder
 
         //Update the TextViews and Button based on the event in the ArrayList
         TextView date = viewHolder.dateTextView;
-        date.setText(event.getDate());
+        date.setText(new StringBuilder().append(event.getDate()).append(" to ").append(event.getEndDate()));
         TextView name = viewHolder.nameTextView;
         name.setText(new StringBuilder().append(event.getName()).append(" - ").append(event.getLocation()));
         TextView description = viewHolder.descriptionTextView;
